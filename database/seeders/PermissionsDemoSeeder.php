@@ -51,8 +51,8 @@ class PermissionsDemoSeeder extends Seeder
         ]);
         $user->assignRole($role3);
 
-        $role3 = Role::create(['name' => 'writer']);
-        $role3->givePermissionTo(Permission::all());
+        $role4 = Role::create(['name' => 'writer']);
+        $role4->givePermissionTo(Permission::all());
 
         $user = \App\Models\User::factory()->create([
             'username' => 'writer',
@@ -60,6 +60,27 @@ class PermissionsDemoSeeder extends Seeder
             'email' => 'writer@example.com',
             'password' => Hash::make('password'),
         ]);
-        $user->assignRole($role3);
+        $user->assignRole($role4);
+
+        $role5 = Role::create(['name' => 'developer']);
+        $role5->givePermissionTo(Permission::all());
+
+        $user = \App\Models\User::factory()->create([
+            'username' => 'developer',
+            'name' => 'developer',
+            'email' => 'developer@example.com',
+            'password' => Hash::make('password'),
+        ]);
+        $user->assignRole($role5);
+
+        $role6 = Role::create(['name' => 'user2']);
+        $user = \App\Models\User::factory()->create([
+            'username' => 'user2',
+            'name' => 'user2',
+            'email' => 'user2@example.com',
+            'password' => Hash::make('password'),
+        ]);
+        $user->assignRole($role6);
+
     }
 }

@@ -6,7 +6,7 @@
             <tr class="p-4">
                 <th>Id</th>
                 <th>Title</th>
-                <th>Description</th>
+                <th>Body</th>
                 <th>Created at</th>
                 <th>Updated at</th>
                 <th>Show</th>
@@ -17,7 +17,7 @@
                 <tr class="p-4">
                     <td class="border border-spacing-2 p-2">  {{ $item->id }}</td>
                     <td class="border border-spacing-2 p-2">  {{ $item->title }}</td>
-                    <td class="border border-spacing-2 p-2">  {{ $item->description }}</td>
+                    <td class="border border-spacing-2 p-2">  {{ $item->body }}</td>
                     <td class="border border-spacing-2 p-2">  {{ $item->created_at }}</td>
                     <td class="border border-spacing-2 p-2">  {{ $item->updated_at }}</td>
                     

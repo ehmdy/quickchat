@@ -14,7 +14,7 @@ class UpdateArticle extends Component
     public $title = '';
  
     #[Validate('required')]
-    public $description = '';
+    public $body = '';
     public int $articleId;
 
     public function mount($articleId)
@@ -22,7 +22,7 @@ class UpdateArticle extends Component
         $this->articleId = $articleId;
         $this->article = Article::find($articleId);
         $this->title = $this->article->title;
-        $this->description = $this->article->description;
+        $this->body = $this->article->body;
     }
 
     public function edit(int $articleId): void
@@ -31,14 +31,14 @@ class UpdateArticle extends Component
         $this->articleId = $articleId;
         
         $this->title = $this->article->title;
-        $this->description = $this->article->description;
+        $this->body = $this->article->body;
     }
 
     public function save():void
     {
         $this->article->update([
             'title' => $this->title,
-            'description' => $this->description,
+            'body' => $this->body,
         ]);
 
         // Optional: Display a success message

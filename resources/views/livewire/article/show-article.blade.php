@@ -5,7 +5,7 @@
             <div class="px-6 py-4">
                 <div class="font-bold text-xl mb-2"> {{ $article->title }}</div>
                 <p class="text-grey-700 text-base">
-                    {{ $article->description }}
+                    {{ $article->body }}
                 </p>
             </div>
             <div class="px-6 py-4">

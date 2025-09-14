@@ -7,14 +7,14 @@
 
             <div class="py-12">
               <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-xs sm:rounded-lg">
                   <div class="p-6 text-gray-900 dark:text-gray-100">
                     <div class="lg:grid grid-cols-3 gap-3">
                         
                       <!-- card -->
                         <!-- All Users -->
                           <div>
-                            <div class="rounded border border-grey-400 overflow-hidden shadow-lg">
+                            <div class="rounded-sm border border-grey-400 overflow-hidden shadow-lg">
                                 <div class="px-6 py-4">
                                   <div class="font-bold text-xl mb-2 capitalize">
                                     {{__('view all users')}}
@@ -39,7 +39,7 @@
 
                         <!-- ARTICLE COUNT -->
                           <div>
-                            <div class="rounded border border-grey-400 overflow-hidden shadow-lg">
+                            <div class="rounded-sm border border-grey-400 overflow-hidden shadow-lg">
                                 <div class="px-6 py-4">
                                   <div class="font-bold text-xl mb-2 capitalize">
                                     {{__('all articles')}}
@@ -64,7 +64,7 @@
 
                         <!-- ARTICLE -->
                           <div>
-                            <div class="rounded border border-grey-400 overflow-hidden shadow-lg">
+                            <div class="rounded-sm border border-grey-400 overflow-hidden shadow-lg">
                                 <div class="px-6 py-4">
                                   <div class="font-bold text-xl mb-2 capitalize">
                                     {{__('shortcuts')}}

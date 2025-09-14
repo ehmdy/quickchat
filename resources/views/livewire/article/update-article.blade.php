@@ -14,7 +14,7 @@
             <x-text-input id="title" 
                 class="block mt-1 w-full" type="text" 
                 name="title" 
-                wire:model="title"
+                wire:model.live="title"
                 value="{{ $title }}"
                 />
             <x-input-error :messages="$errors->get('title')" class="mt-2" />
@@ -23,15 +23,15 @@
 
         <!-- Description -->
         <div class="mt-4">
-            <x-input-label for="description" :value="__('Description')" />
+            <x-input-label for="body" :value="__('body')" />
              
             <textarea
                 class="form-textarea block mt-1 w-full" 
-                name="description" 
-                wire:model="description"/>
-                {{ $description }}
+                name="body" 
+                wire:model.live="body"/>
+                {{ $body }}
             </textarea>
-            <x-input-error :messages="$errors->get('description')" class="mt-2" />
+            <x-input-error :messages="$errors->get('body')" class="mt-2" />
         </div>
 
       

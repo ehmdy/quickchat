@@ -5,6 +5,9 @@ use Illuminate\Support\Facades\Route;
 use App\Models\User;
 use App\Models\Article;
 use App\Livewire\Article\ShowArticle;
+use App\Models\GroupMessage;
+use Illuminate\Support\Str;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -45,6 +48,7 @@ Route::get('/list/articles', function () {
     return view('articles.list');
 })->name('list-article');
 
+
 // Create Article
 Route::get('/articles', function () {
     return view('articles.create');
@@ -78,6 +82,55 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+//  Create Group
+Route::get('/create-group', function () {
+    return view('create-group');
+})->name('create-group');
+// View Group Info
+Route::get('/view-group-info/{group}', function (\App\Models\Group $group) {
+    return view('view-group-info', ['group' => $group]);
+})->name('view-group-info');
+
+// Invite
+Route::get('/invite/{link}', function ($link) {
+    $group = \App\Models\Group::with('user')->where('link', $link)->firstOrFail();
+    return view('invite', compact('group'));
+})->name('invite');
+
+Route::match(['get', 'post'], '/group/join/{group}', function (\App\Models\Group $group) {
+    $userId = auth()->id();
+    
+    // Check if user is already a member
+    $existing = GroupMessage::where('group_id', $group->id)
+        ->where('invited_by', $userId)
+        ->first();
+
+    if (!$existing) {
+        // First create a message
+        $message = \App\Models\Message::create([
+            'user_id' => $userId,
+            'group_id' => $group->id,
+            'body' => 'Requested to join the group',
+        ]);
+
+        // Then create the group message
+        GroupMessage::create([
+            'group_id' => $group->id,
+            'message_id' => $message->id,
+            'type' => 'pending',
+            'invitation_link' => Str::uuid(),
+            'invited_by' => $userId,
+        ]);
+
+        return  view('group.dashboard', compact('group')) 
+            ->with('status', 'Your request to join the group has been sent!');
+    }
+
+    return view('group.dashboard', compact('group'))
+        ->with('status', 'You have already requested to join this group.');
+})->name('group.join');
+
 
 require __DIR__.'/auth.php';
 
