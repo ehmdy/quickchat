@@ -22,14 +22,14 @@ class Chat extends Component
         ];
     }
 
-    public function render():View
+    public function render(): View
     {
         $messages = Message::with('user')
-        ->latest()
-        ->take(10)
-        ->get()
-        ->sortBy('id');
-        
+            ->latest()
+            ->take(10)
+            ->get()
+            ->sortBy('id');
+
         return view('livewire.chat', compact('messages'));
     }
 
@@ -47,7 +47,7 @@ class Chat extends Component
         if ($receiver && $receiver->id !== auth()->id()) {
             $receiver->notify(new NewMessageNotification($message, auth()->user(), null));
         }
-    
+
 
         $this->reset('body');
     }
