@@ -25,6 +25,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'profile_picture',
     ];
 
     /**
@@ -47,7 +48,11 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
- 
- 
-  
+    /**
+     * Get the groups that the user belongs to.
+     */
+    public function groups()
+    {
+        return $this->belongsToMany(Group::class);
+    }
 }

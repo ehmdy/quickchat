@@ -5,7 +5,6 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Message extends Model
 {
@@ -13,6 +12,7 @@ class Message extends Model
 
     protected $fillable = [
         'user_id',
+        'group_id',
         'body'
     ];
 
@@ -21,9 +21,9 @@ class Message extends Model
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
-    public function group() : BelongsToMany
+    public function group(): BelongsTo
     {
-        return $this->belongsToMany(Group::class);
+        return $this->belongsTo(Group::class);
     }
 
     public function user(): BelongsTo

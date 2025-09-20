@@ -14,17 +14,30 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans text-gray-900 antialiased">
-        <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
-            <div>
-                <a href="/">
-                    <x-application-logo class="w-20 h-20 fill-current text-gray-500" />
-                </a>
+    <body class="font-sans antialiased" x-data="darkModeStore()" 
+          :class="{ 'dark': darkMode }" 
+          x-init="initDarkMode()">
+        <div class="min-h-screen bg-gray-100 dark:bg-gray-900 transition-colors duration-300 pb-16 lg:pb-0">
+            @include('layouts.navigation')
+
+            <div class="flex flex-col sm:justify-center items-center pt-6 sm:pt-0">
+                <div class="mb-6">
+                    <a href="/">
+                        <div class="w-20 h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center mx-auto shadow-lg">
+                            <svg class="w-10 h-10 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                <path d="M2 5a2 2 0 012-2h7a2 2 0 012 2v4a2 2 0 01-2 2H9l-3 3v-3H4a2 2 0 01-2-2V5z"/>
+                            </svg>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="w-full sm:max-w-md px-6 py-8 bg-white dark:bg-gray-800 shadow-lg overflow-hidden sm:rounded-xl border border-gray-200 dark:border-gray-700">
+                    {{ $slot }}
+                </div>
             </div>
 
-            <div class="w-full sm:max-w-md mt-6 px-6 py-4 bg-white dark:bg-gray-800 shadow-md overflow-hidden sm:rounded-lg">
-                {{ $slot }}
-            </div>
+            {{-- Mobile Footer Navigation --}}
+            <x-mobile-footer />
         </div>
     </body>
 </html>

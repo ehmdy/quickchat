@@ -29,8 +29,10 @@ class CreateGroup extends Component
                 'name' => $this->name,
                 'link' => Uuid::uuid4()->toString(),
                 'created_by' => auth()->id(),
-               
             ]);
+
+            // Add the creator to the group
+            $group->users()->attach(auth()->id());
 
             session()
             ->flash('status',"Group created successfully. Share this link to invite others: " . url('/invite/' . $group->link));

@@ -23,6 +23,27 @@ Route::get('/', function () {
     return view('index');
 });
 
+// Footer Pages
+Route::get('/about', function () {
+    return view('about');
+});
+
+Route::get('/contact', function () {
+    return view('contact');
+});
+
+Route::get('/privacy', function () {
+    return view('privacy');
+});
+
+Route::get('/terms', function () {
+    return view('terms');
+});
+
+Route::get('/faq', function () {
+    return view('faq');
+});
+
 // Admin Routes
 Route::group(['middleware' => ['role:admin']], function () { 
 
@@ -71,7 +92,7 @@ Route::get('/articles/{article}/edit', function (Article $article) {
 Route::group(['middleware' => ['auth','accepted.terms']], function () { 
 
     // User Dashboard
-    Route::get('/user/dashboard', function () {
+    Route::get('/chat', function () {
         return view('dashboard');
     })->name('user.dashboard');
 

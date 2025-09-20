@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Permission\Traits\HasRoles;
 use App\Models\User;
 use App\Models\Message;
@@ -25,9 +26,14 @@ class Group extends Model
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
 
-    public function messages(): BelongsToMany
+    public function messages()
     {
-        return $this->belongsToMany(Message::class);
+        return $this->hasMany(Message::class);
+    }
+    
+    public function latestMessage()
+    {
+        return $this->hasOne(Message::class)->latest();
     }
     
     public function users(): BelongsToMany

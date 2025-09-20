@@ -10,6 +10,38 @@ window.axios = axios;
 
 window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 
+// Echo configuration
+import Echo from 'laravel-echo';
+import Pusher from 'pusher-js';
+
+window.Pusher = Pusher;
+
+window.Echo = new Echo({
+    broadcaster: 'pusher',
+    key: import.meta.env.VITE_PUSHER_APP_KEY,
+    cluster: import.meta.env.VITE_PUSHER_APP_CLUSTER,
+    forceTLS: true,
+    wsHost: import.meta.env.VITE_PUSHER_HOST,
+    wsPort: import.meta.env.VITE_PUSHER_PORT,
+    wssPort: import.meta.env.VITE_PUSHER_PORT,
+    disableStats: true,
+    enabledTransports: ['ws', 'wss'],
+});
+
+// Listen for message broadcasts
+window.Echo.channel('chat')
+    .listen('.message.sent', (e) => {
+        // Emit to Livewire components
+        if (window.Livewire) {
+            window.Livewire.emit('messageReceived', e.message);
+        }
+        
+        // Also dispatch a custom event for any other listeners
+        window.dispatchEvent(new CustomEvent('message-received', {
+            detail: e.message
+        }));
+    });
+
 /**
  * Echo exposes an expressive API for subscribing to channels and listening
  * for events that are broadcast by Laravel. Echo and event broadcasting
